@@ -8,28 +8,33 @@
                 Rock Paper Scissors
             </p>
 
-            <button onclick="
-            playGame('rock')
-                const compMove = computerMove();
-            ">
+            <button onclick="playGame('rock')">
                 Rock
             </button>
 
-            <button onclick="
-                playGame('paper');
-                const compMove = computerMove();
-            ">
+            <button onclick="playGame('paper')">
                 Paper
             </button>
 
-            <button onclick="
-                playGame('scissors');
-                const compMove = computerMove();
-            ">
+            <button onclick="playGame('scissors')">
                 Scissors
             </button>
 
+            <button onclick="
+                score.wins = 0;
+                score.ties = 0;
+                score.losses = 0;
+                alert('Score reset');
+            ">
+                Reset Score
+            </button>
+
             <script>
+                const score = {
+                    wins: 0,
+                    ties: 0,
+                    losses: 0
+                };
                 function playGame(userMove){
                     const compMove = computerMove();
                     gameResult = '';
@@ -45,8 +50,7 @@
                             gameResult = 'You win';
                         }
                     }
-
-                    if (userMove === 'paper'){
+                    else if (userMove === 'paper'){
                         if (compMove === 'rock'){
                         gameResult = 'You win';
                         }
@@ -57,8 +61,7 @@
                             gameResult = 'You lose';
                         }
                     }
-
-                    if (userMove === 'scissors'){
+                    else if (userMove === 'scissors'){
                         if (compMove === 'rock'){
                         gameResult = 'You lose';
                         }
@@ -70,9 +73,19 @@
                         }
                     }
 
-                    alert(`${gameResult}. Computer picked ${compMove}.`);
-                }
+                    if (gameResult === 'You win'){
+                        score.wins += 1;
+                    }
+                    else if (gameResult === "It's a tie"){
+                        score.ties += 1;
+                    }
+                    else if (gameResult === "You lose"){
+                        score.losses += 1;
+                    }
 
+                    alert(`${gameResult}. You picked ${userMove}. Computer picked ${compMove}.
+Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
+                }
 
                 function computerMove(){
                 let compMove = '';
