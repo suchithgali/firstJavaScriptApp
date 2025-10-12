@@ -25,16 +25,19 @@
                 score.ties = 0;
                 score.losses = 0;
                 alert('Score reset');
+                localStorage.removeItem('score');
             ">
                 Reset Score
             </button>
-
+ 
             <script>
-                const score = {
+                // Initialize score from localStorage or default to 0 if first time playing
+                  score = JSON.parse(localStorage.getItem('score')) || {
                     wins: 0,
                     ties: 0,
                     losses: 0
                 };
+
                 function playGame(userMove){
                     const compMove = computerMove();
                     gameResult = '';
@@ -82,6 +85,8 @@
                     else if (gameResult === "You lose"){
                         score.losses += 1;
                     }
+
+                    localStorage.setItem('score', JSON.stringify(score)); //saves values even though page reload
 
                     alert(`${gameResult}. You picked ${userMove}. Computer picked ${compMove}.
 Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
