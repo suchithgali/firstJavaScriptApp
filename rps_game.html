@@ -25,16 +25,19 @@
                 score.ties = 0;
                 score.losses = 0;
                 alert('Score reset');
+                localStorage.removeItem('score');
             ">
                 Reset Score
             </button>
-
+ 
             <script>
-                const score = {
+                // Initialize score from localStorage or default to 0 if first time playing
+                  score = JSON.parse(localStorage.getItem('score')) || {
                     wins: 0,
                     ties: 0,
                     losses: 0
                 };
+
                 function playGame(userMove){
                     const compMove = computerMove();
                     gameResult = '';
@@ -83,6 +86,8 @@
                         score.losses += 1;
                     }
 
+                    localStorage.setItem('score', JSON.stringify(score)); //saves values even though page reload
+
                     alert(`${gameResult}. You picked ${userMove}. Computer picked ${compMove}.
 Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
                 }
@@ -102,6 +107,15 @@ Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
 
                 return compMove;
                 }
+
+                const object1 = {
+                    message: 'hello'
+                };
+
+                const object2 = object1; //object 2 holds a reference to object 1
+                object1.message = 'Good job';
+                console.log(object1);
+                console.log(object2);
             </script>
 
         </body>
