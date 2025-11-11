@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html>
         <head>
+            <link rel="stylesheet" href="styles.css">
 
         </head>
         <body>
-            <p>
+            <p class="title">
                 Rock Paper Scissors
             </p>
 
-            <button onclick="playGame('rock')">
-                Rock
-            </button>
-
-            <button onclick="playGame('paper')">
-                Paper
-            </button>
-
-            <button onclick="playGame('scissors')">
-                Scissors
-            </button>
+            <img src = "images/rock-emoji.png" class="move-img" onclick="playGame('rock')">
+            <img src = "images/paper-emoji.png" class="move-img" onclick="playGame('paper')">
+            <img src = "images/scissors-emoji.png" class="move-img" onclick="playGame('scissors')">
 
             <button onclick="
                 score.wins = 0;
                 score.ties = 0;
                 score.losses = 0;
-                alert('Score reset');
+                gameResult = '';
                 localStorage.removeItem('score');
+                updateScore();
+                updateState();
+                updateMove();
             ">
                 Reset Score
             </button>
+            <p class="gameResult"></p>
+            <p class="moves"></p>
+            <p class="score"></p>
  
             <script>
                 // Initialize score from localStorage or default to 0 if first time playing
-                  score = JSON.parse(localStorage.getItem('score')) || {
+                  let score = JSON.parse(localStorage.getItem('score')) || {
                     wins: 0,
                     ties: 0,
                     losses: 0
                 };
+
 
                 function playGame(userMove){
                     const compMove = computerMove();
@@ -45,6 +45,7 @@
                     if (userMove === 'rock'){
                         if (compMove === 'rock'){
                         gameResult = "It's a tie";
+                        
                         }
                         else if (compMove === 'paper'){
                             gameResult = 'You lose';
@@ -87,9 +88,9 @@
                     }
 
                     localStorage.setItem('score', JSON.stringify(score)); //saves values even though page reload
-
-                    alert(`${gameResult}. You picked ${userMove}. Computer picked ${compMove}.
-Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
+                    updateScore();
+                    updateState();
+                    updateMove(userMove, compMove);
                 }
 
                 function computerMove(){
@@ -112,10 +113,34 @@ Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
                     message: 'hello'
                 };
 
+                function updateState(){
+                    if (gameResult != ''){
+                        document.querySelector(".gameResult").innerHTML = gameResult;
+                    }
+                    else{
+                        document.querySelector(".gameResult").innerHTML = '';
+                    }
+                }
+
+                function updateScore(){
+                    document.querySelector('.score').innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`; //update score                    }
+                }
+
+                function updateMove(userMove, compMove){
+                    if (gameResult != ''){
+                        document.querySelector('.moves').innerHTML = `You picked: ${userMove} Computer Picked: ${compMove}`;
+                    }
+                    else{
+                        document.querySelector('.moves').innerHTML = '';
+                    }
+                }
+
                 const object2 = object1; //object 2 holds a reference to object 1
                 object1.message = 'Good job';
                 console.log(object1);
                 console.log(object2);
+                const {message} = object1;
+                console.log(message);
             </script>
 
         </body>
