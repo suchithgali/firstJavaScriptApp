@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <p>Todo List</p>
+        <input id="input_text" type="text" placeholder="Todo name">
+        <input id="date_selector" type="date">
+        <button onclick="addTodo()">Add</button>
+        <p class="array_output"></p>
+        <script>
+            const myEvents = [];
+            const myDates = [];
+            
+            function addTodo() {
+                const eventInput = document.getElementById('input_text');
+                const dateInput = document.getElementById('date_selector');
+                myEvents.push(eventInput.value);
+                myDates.push(dateInput.value);
+                
+                renderTodos();
+                
+                eventInput.value = ''; 
+                dateInput.value = '';
+            }
+
+            function deleteTodo(index){
+                myEvents.splice(index, 1);  
+                myDates.splice(index, 1);  
+                
+                renderTodos();  
+            }
+            
+            function renderTodos() {
+                document.querySelector(".array_output").innerHTML = '';
+                
+                let i = 0;
+                while (i < myEvents.length){
+                    const deleteBtn = `<button style="background-color: red; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;" onclick="deleteTodo(${i})">Delete</button>`;
+                    document.querySelector(".array_output").innerHTML += myEvents[i] + " " + myDates[i] + " " + deleteBtn + '<br>';
+                    i++;
+                }
+            }
+        </script>
+    </body>
+</html>
