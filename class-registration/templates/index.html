@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+
+
+
+
+{% block body %}
+    <div class="registration-container">
+        <h1>Register for Classes</h1>
+        <table>
+            <tr>
+                <th>CRN</th>
+                <th>Course Name</th>
+                <th>Professor</th>
+                <th>Days/Time</th>
+            </tr>
+
+            <tr>
+
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <button>Delete</button>
+
+            </tr>
+        </table>
+
+        <form action="/" method="POST">
+            <input type = "text" name = "content" placeholder="Enter Course details">
+            <input type = "submit" value="Submit Course">
+        </form>
+
+    </div>
+
+{% endblock %}
+
