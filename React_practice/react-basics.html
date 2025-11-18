@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      const container = document.querySelector('.js-container');
+      
+      function ChatInput(){
+        return (
+          <>
+            <input placeholder="Send a message to chatbot" size="30"/>
+            <button>Send</button>
+          </>
+        );
+      }
+
+      function ChatHello(){
+        return(
+        <>
+            <p>Hello Chatbot</p>
+            <img src=""></img>
+        </>
+        );
+      }
+
+      const app = (
+        <>
+          <ChatInput />
+        </>
+      );
+
+      ReactDOM.createRoot(container).render(app);
+    </script>
+  </body>
+</html>

@@ -18,20 +18,32 @@
                 <th>Professor</th>
                 <th>Days/Time</th>
             </tr>
-
+            {% for task in tasks %}
             <tr>
 
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <button>Delete</button>
+                <td>{{task.crn}}</td>
+                <td>{{task.class_name}}</td>
+                <td>{{task.teacher_name}}</td>
+                <td>{{task.days_time}}</td>
+                <td>
+                    <a href="/delete/{{task.crn}}">
+                        <button>Delete</button>
+                    </a>
+                    <a href="/update/{{task.crn}}">
+                        <button>Update</button>
+                    </a>
+                    
+                </td>
 
             </tr>
+            {% endfor %}
         </table>
 
         <form action="/" method="POST">
-            <input type = "text" name = "content" placeholder="Enter Course details">
+            <input type = "text" name = "crn" placeholder="Enter CRN">
+            <input type = "text" name = "course_name" placeholder="Enter Course Name">
+            <input type = "text" name = "professor" placeholder="Enter Profesor Name">
+            <input type = "text" name = "days_time" placeholder="Enter Days and Time">
             <input type = "submit" value="Submit Course">
         </form>
 
